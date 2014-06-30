@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+
+basedir = File.expand_path(File.dirname(__FILE__) + "/..")
+FileUtils.cp "#{basedir}/config/cron.config", '/etc/cron.d/cloudscopes-monitoring'
+FileUtils.cp "#{basedir}/config/monitoring.yaml", '/etc/cloudscopes-monitoring.yaml'
