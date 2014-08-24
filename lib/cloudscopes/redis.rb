@@ -13,6 +13,13 @@ module Cloudscopes
       end.reduce(0,:+)
     end
     
+    def list_size(*keys)
+      keys = [ keys ] unless keys.is_a? Array
+      keys.collect do |key|
+        @redis.llen("#{key}")
+      end.reduce(0,:+)
+    end
+    
     def resques(pattern)
       @redis.smembers("resque:queues").grep(pattern)
     end

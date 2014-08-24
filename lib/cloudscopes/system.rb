@@ -33,7 +33,7 @@ module Cloudscopes
     end
     
     def service(name)
-      %x(/usr/sbin/service #{name} status 2>/dev/null)
+      %x(PATH=/usr/sbin:/usr/bin:/sbin:/bin /usr/sbin/service #{name} status 2>/dev/null)
       $?.exitstatus == 0
     end
     
