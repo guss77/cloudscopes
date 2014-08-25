@@ -13,8 +13,8 @@ module Cloudscopes
       @value = nil
       
       begin
-        return if metric['requires'] and ! Monitoring.get_binding.eval(metric['requires']) 
-        @value = Monitoring.get_binding.eval(metric['value'])
+        return if metric['requires'] and ! Cloudscopes.get_binding.eval(metric['requires']) 
+        @value = Cloudscopes.get_binding.eval(metric['value'])
       rescue => e
         STDERR.puts("Error evaluating #{@name}: #{e}")
         puts e.backtrace

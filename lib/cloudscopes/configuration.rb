@@ -3,7 +3,7 @@ module Cloudscopes
   attr_reader :should_publish, :usage_requested
 
   def self.init
-    @opts = Monitoring::Options.new
+    @opts = Cloudscopes::Options.new
     usage if usage_requested
     configuration = {}
     (@opts.files.empty?? [ STDIN ] : @opts.files.collect { |fn| File.new(fn) }).each do |configfile|

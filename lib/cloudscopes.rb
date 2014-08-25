@@ -24,7 +24,7 @@ module Cloudscopes
   end
 
   def self.method_missing(*args)
-    Monitoring.const_get(args.shift.to_s.capitalize).new(*args)
+    Cloudscopes.const_get(args.shift.to_s.capitalize).new(*args)
   end
 
 end
