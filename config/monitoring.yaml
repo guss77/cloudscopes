@@ -14,7 +14,7 @@ metrics:
       value: system.iostat[8]
     - name: Memory Utilization
       unit: Percent
-      value: 100 * memory.Active / memory.MemTotal
+      value: 100 * (1 - (memory.MemFree / memory.MemTotal))
       
     - name: Available Space on System
       unit: Gigabytes
