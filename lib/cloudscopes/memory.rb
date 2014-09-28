@@ -10,11 +10,11 @@ module Cloudscopes
     end
     
     def MemAvailable
-      return MemFree + Buffers + Cached
+      return self.MemFree + self.Buffers + self.Cached
     end
     
     def MemUsed
-      return MemTotal - MemFree - Buffers - Cached
+      return self.MemTotal - self.MemFree - self.Buffers - self.Cached
     end
 
   end
