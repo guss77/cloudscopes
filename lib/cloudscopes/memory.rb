@@ -8,6 +8,14 @@ module Cloudscopes
       next if data.nil? 
       define_method(data[:name]) { data[:value] }
     end
+    
+    def MemAvailable
+      return MemFree + Buffers + Cached
+    end
+    
+    def MemUsed
+      return MemTotal - MemFree - Buffers - Cached
+    end
 
   end
   
