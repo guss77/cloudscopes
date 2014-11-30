@@ -27,6 +27,7 @@ module Cloudscopes
   end
   
   def self.redis(host = 'localhost', port = 6379)
+    require 'redis'
     RedisClient.new(host,port)
   end
   

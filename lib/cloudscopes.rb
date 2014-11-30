@@ -3,7 +3,6 @@ require 'rubygems'
 #require 'bundler/setup' #if ENV['BUNDLE_GEMFILE'] && File.exists?(ENV['BUNDLE_GEMFILE'])
 
 require 'aws-sdk'
-require 'redis'
 require 'optparse'
 require 'ffi'
 
