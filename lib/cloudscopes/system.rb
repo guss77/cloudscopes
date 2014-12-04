@@ -27,7 +27,7 @@ module Cloudscopes
     end
     
     def bluepill_ok?(name)
-      %x(/usr/local/bin/bluepill wfs status | grep -v up | grep pid)
+      %x(/usr/local/bin/bluepill #{name} status | grep -v up | grep pid)
       $?.exitstatus == 1 # grep pid should not match because all the pids are "up"
     end
     
