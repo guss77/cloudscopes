@@ -27,8 +27,10 @@ module Cloudscopes
     end
     
     def bluepill_ok?(name)
-      %x(/usr/local/bin/bluepill #{name} status | grep -v up | grep pid)
-      $?.exitstatus == 1 # grep pid should not match because all the pids are "up"
+      %x(/usr/local/bin/bluepill wfs status).split("\n").
+        select { |ln| ln =~ /pid:/ }.
+        collect { |ln| ln =~ /pid:(\d+).*:\s*(.*)/ and { pid: $1, status: $2 } }.
+        all? { |proc| proc[:status] == "up"}
     end
     
   end
