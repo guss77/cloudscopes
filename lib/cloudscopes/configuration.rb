@@ -36,4 +36,8 @@ module Cloudscopes
                           region: @settings['region']
   end
 
+  def self.data_dimensions
+    @settings['dimensions'] || ({ 'InstanceId' => '#{ec2.instance_id}' })
+  end
+
 end
