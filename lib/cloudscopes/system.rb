@@ -33,6 +33,10 @@ module Cloudscopes
         all? { |proc| proc[:status] == "up"}
     end
     
+    def ps
+      Cloudscopes::Process.new.list
+    end
+    
   end
   
   def self.system # must define, otherwise kernel.system matches

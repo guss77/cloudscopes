@@ -15,10 +15,12 @@ metrics:
     - name: Memory Utilization
       unit: Percent
       value: 100 * memory.MemUsed / memory.MemTotal
-      
     - name: Available Space on System
       unit: Gigabytes
       value: filesystem.df("/").avail / 1024 / 1024 / 1024
+    - name: MyService processes
+      unit: Count
+      value: system.ps.select { |p| p.exe_name == 'myservice' }.size
 
   Queues:      
     - name: Pending Resque Items

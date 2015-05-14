@@ -1,3 +1,3 @@
 module Cloudscopes
-  VERSION = "0.8.11"
+  VERSION = "0.9"
 end
