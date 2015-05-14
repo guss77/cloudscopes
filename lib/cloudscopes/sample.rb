@@ -4,8 +4,19 @@ module Cloudscopes
     
     attr_reader :name, :value, :unit
     
-    ec2_instanceid_file = "/var/lib/cloud/data/previous-instance-id"
-    @@instanceid = File.exists?(ec2_instanceid_file) ? File.read(ec2_instanceid_file).chomp : nil
+    def dimensions
+      Cloudscopes.data_dimensions.collect do |key,value|
+        begin
+          if ! value.start_with?('"') and value.include?('#') # user wants to expand a string expression, but can't be bothered with escaping double quotes
+            { name: key, value: Cloudscopes.get_binding.eval('"' + value + '"') }
+          else
+            { name: key, value: Cloudscopes.get_binding.eval(value) }
+          end
+        rescue NameError # assume the user meant to send the static text
+          { name: key, value: value }
+        end
+      end
+    end
     
     def initialize(namespace, metric)
       @name = metric['name']
@@ -29,7 +40,7 @@ module Cloudscopes
       return nil if @value.nil?
       data = { metric_name: @name, value: @value }
       data[:unit] = @unit if @unit
-      data[:dimensions] = [ { name: "InstanceId", value: @@instanceid } ] unless @@instanceid.nil?
+      data[:dimensions] = dimensions
       data
     end
     

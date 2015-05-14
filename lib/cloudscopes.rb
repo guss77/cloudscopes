@@ -17,6 +17,7 @@ require 'cloudscopes/process'
 require 'cloudscopes/filesystem'
 require 'cloudscopes/redis'
 require 'cloudscopes/network'
+require 'cloudscopes/ec2'
 
 module Cloudscopes
 

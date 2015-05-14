@@ -3,6 +3,8 @@ settings:
   key: AWS_KEY_ID 
   secret: AWS_SECRET_KEY
   region: us-west-2
+  dimensions:
+    InstanceId: "#{ec2.availability_zone}.#{ec2.instance_id}"
 
 metrics:
   Systems: 
