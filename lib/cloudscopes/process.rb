@@ -1,3 +1,5 @@
+require 'etc'
+
 module Cloudscopes
   
   class Process
@@ -8,9 +10,13 @@ module Cloudscopes
         raise "Invalid system process id #{id}" unless @id > 0 && @id <= 65536
       end
       
+      def procpath(field = nil)
+        "/proc/#{@id}/#{field}"
+      end
+      
       def exe
         begin
-          File.readlink("/proc/#{@id}/exe")
+          File.readlink(procpath('exe'))
         rescue SystemCallError => e # report and ignore
           $stderr.puts "Error accessing process #{@id}: #{e.message}"
           ''
@@ -19,6 +25,14 @@ module Cloudscopes
       
       def exe_name
         File.basename(exe)
+      end
+      
+      def uid
+        File.stat(procpath('mem')).uid
+      end
+      
+      def user
+        Etc.getpwuid(uid).name
       end
     end
     
