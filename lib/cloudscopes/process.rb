@@ -17,6 +17,8 @@ module Cloudscopes
       def exe
         begin
           File.readlink(procpath('exe'))
+        rescue Errno::ENOENT => e # ignore kernel threads
+          ''
         rescue SystemCallError => e # report and ignore
           $stderr.puts "Error accessing process #{@id}: #{e.message}"
           ''
