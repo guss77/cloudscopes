@@ -30,11 +30,15 @@ module Cloudscopes
       end
       
       def uid
-        File.stat(procpath('mem')).uid
+        begin
+          File.stat(procpath('mem')).uid
+        rescue Errno::ENOENT => e
+          nil
+        end
       end
       
       def user
-        Etc.getpwuid(uid).name
+        Etc.getpwuid(uid || 0).name
       end
     end
     
