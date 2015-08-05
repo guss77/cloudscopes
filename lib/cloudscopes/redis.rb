@@ -20,6 +20,17 @@ module Cloudscopes
       end.reduce(0,:+)
     end
     
+    def resque_workers(queue, activity = nil)
+      case activity
+      when :active
+        @redis.keys('resque:worker:*:processing_queue').count
+      when :inactive
+        resque_workers(queue, :available) - resque_workers(queue, :active)
+      else
+        @redis.keys('resque:worker:*:processing_queue:started').count
+      end
+    end
+    
     def resques(pattern)
       @redis.smembers("resque:queues").grep(pattern)
     end
