@@ -1,4 +1,6 @@
 settings:
+  configdir: /etc/cloudscopes/monitor.d
+  interval: 60
   provider: cloudwatch
   key: AWS_KEY_ID 
   secret: AWS_SECRET_KEY
