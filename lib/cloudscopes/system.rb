@@ -29,7 +29,7 @@ module Cloudscopes
     def bluepill_ok?(name)
       bin = Dir['/usr/local/rvm/gems/ruby-*/bin/bluepill','/usr/local/bin/bluepill'].first
       return false unless bin
-      %x(#{bin} #{name} status).split("\n").
+      %x(#{bin} #{name} status 2>&1).split("\n").
         select { |ln| ln =~ /pid:/ }.
         collect { |ln| ln =~ /pid:(\d+).*:\s*(.*)/ and { pid: $1, status: $2 } }.
         all? { |proc| proc[:status] == "up"}
