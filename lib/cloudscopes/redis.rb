@@ -26,6 +26,12 @@ module Cloudscopes
         @redis.keys("resque:worker:*:#{queue}").count
       when :inactive
         resque_workers(queue, :available) - resque_workers(queue, :active)
+      when :usage
+        if resque_workers(queue, :available) > 0
+          resque_workers(queue, :active) / resque_workers(queue, :available)
+        else
+          1
+        end
       else
         @redis.keys("resque:worker:*:#{queue}:started").count
       end
