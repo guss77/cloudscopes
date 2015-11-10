@@ -23,11 +23,11 @@ module Cloudscopes
     def resque_workers(queue, activity = nil)
       case activity
       when :active
-        @redis.keys('resque:worker:*:processing_queue').count
+        @redis.keys("resque:worker:*:#{queue}").count
       when :inactive
         resque_workers(queue, :available) - resque_workers(queue, :active)
       else
-        @redis.keys('resque:worker:*:processing_queue:started').count
+        @redis.keys("resque:worker:*:#{queue}:started").count
       end
     end
     
