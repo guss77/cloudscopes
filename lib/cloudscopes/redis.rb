@@ -27,8 +27,8 @@ module Cloudscopes
       when :inactive
         resque_workers(queue, :available) - resque_workers(queue, :active)
       when :usage
-        if resque_workers(queue, :available) > 0
-          resque_workers(queue, :active) / resque_workers(queue, :available)
+        if resque_workers(queue) > 0
+          resque_workers(queue, :active).to_f / resque_workers(queue)
         else
           1
         end
