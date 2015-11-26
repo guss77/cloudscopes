@@ -44,8 +44,13 @@ module Cloudscopes
   end
   
   def self.redis(host = 'localhost', port = 6379)
-    require 'redis'
-    RedisClient.new(host,port)
+    begin
+      require 'redis'
+      RedisClient.new(host,port)
+    rescue LoadError
+      # redis gem not installed
+      nil
+    end
   end
   
 end
