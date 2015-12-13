@@ -30,7 +30,7 @@ module Cloudscopes
         if resque_workers(queue) > 0
           resque_workers(queue, :active).to_f / resque_workers(queue)
         else
-          1
+          0
         end
       else
         @redis.keys("resque:worker:*:#{queue}:started").count
