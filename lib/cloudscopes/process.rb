@@ -5,9 +5,12 @@ module Cloudscopes
   class Process
     
     class SystemProcess
+    
+      @@maxpid = File.read('/proc/sys/kernel/pid_max').to_i
+       
       def initialize(id)
         @id = id.to_i
-        raise "Invalid system process id #{id}" unless @id > 0 && @id <= 65536
+        raise "Invalid system process id #{id}" unless @id > 0 && @id <= @@maxpid
       end
       
       def procpath(field = nil)
