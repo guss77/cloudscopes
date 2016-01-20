@@ -10,7 +10,7 @@ module Cloudscopes
        
       def initialize(id)
         @id = id.to_i
-        raise "Invalid system process id #{id}" unless @id > 0 && @id <= @@maxpid
+        raise "Invalid system process id #{id}" unless @id > 0 && @id < @@maxpid
       end
       
       def procpath(field = nil)
