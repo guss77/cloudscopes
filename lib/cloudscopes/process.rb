@@ -56,20 +56,13 @@ module Cloudscopes
         Etc.getpwuid(uid || 0).name
       end
       
-      def mem_usage
-        # lots of magic follow, peruse at your own risk
-        maps.strip.split("\n").collect do |l|
-          l.split(/\s+/)
-        end.select do |r|
-          r[4].to_i == 0 && r[1] !~ /s/
-        end.collect do |r|
-          b,e = r[0].split(/-/,2).collect{ |a| a.to_i(16) }
-          r[0] = e - b
-          r
-        end.inject(0) do |s,r|
-          s += r[0]
-        end
+      def mem_usage_rss
+        statm.strip.split(/\s+/)[1].to_i * Etc.sysconf(Etc::SC_PAGESIZE)
       end
+      def mem_usage_virt
+        statm.strip.split(/\s+/)[0].to_i * Etc.sysconf(Etc::SC_PAGESIZE)
+      end
+      alias mem_usage mem_usage_virt
     end
     
     def list
