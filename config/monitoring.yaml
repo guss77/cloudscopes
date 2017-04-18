@@ -2,14 +2,14 @@ settings:
   configdir: /etc/cloudscopes/monitor.d
   interval: 60
   provider: cloudwatch
-  key: AWS_KEY_ID 
-  secret: AWS_SECRET_KEY
+  #key: AWS_KEY_ID
+  #secret: AWS_SECRET_KEY
   region: us-west-2
   dimensions:
     InstanceId: "#{ec2.availability_zone}.#{ec2.instance_id}"
 
 metrics:
-  Systems: 
+  Systems:
     - name: Load Per CPU
       unit: Percent
       value: 100 * system.loadavg5 / system.cpucount
@@ -26,16 +26,16 @@ metrics:
       unit: Count
       value: system.ps.select { |p| p.exe_name == 'myservice' }.size
 
-  Queues:      
+  Queues:
     - name: Pending Resque Items
       unit: Count
       value: redis.resque_size("some_queue")
       requires: system.service('redis-server')
-      
+
   Services:
     - name: My service status
       value: if system.service('my-service') then 1 else 0 end
-      requires: File.exists?('/usr/sbin/my-service')     
+      requires: File.exists?('/usr/sbin/my-service')
     - name: Nginx Running
       value: if network.port_open?(80) then 1 else 0 end
       requires: File.exists?(Dir.glob("/etc/nginx/sites-enabled/*").first || "")
