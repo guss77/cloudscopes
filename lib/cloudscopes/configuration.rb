@@ -1,11 +1,8 @@
 module Cloudscopes
 
   class << self
-    attr_reader :should_publish, :usage_requested
-
     def init
       @opts = Cloudscopes::Options.new
-      usage if usage_requested
       configuration = {}
       (@opts.files.empty?? [ STDIN ] : @opts.files.collect { |fn| File.new(fn) }).each do |configfile|
         configuration.merge! YAML.load(configfile.read)
@@ -14,17 +11,8 @@ module Cloudscopes
       configuration['metrics']
     end
 
-    def usage_requested
-      @opts.usage
-    end
-
     def should_publish
-      @opts.publish != false
-    end
-
-    def usage
-      puts "#{@opts}"
-      exit 5
+      @opts.publish
     end
 
     def client
