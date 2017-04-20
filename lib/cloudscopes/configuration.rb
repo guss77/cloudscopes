@@ -1,12 +1,12 @@
+require 'yaml'
+require 'aws-sdk'
+
 module Cloudscopes
 
   class << self
     def init
       @opts = Cloudscopes::Options.new
-      configuration = {}
-      (@opts.files.empty?? [ STDIN ] : @opts.files.collect { |fn| File.new(fn) }).each do |configfile|
-        configuration.merge! YAML.load(configfile.read)
-      end
+      configuration = YAML.load(File.read(@opts.config_file))
       @settings = configuration['settings']
       configuration['metrics']
     end
