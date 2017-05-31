@@ -1,11 +1,7 @@
 require 'net/http'
 
 module Cloudscopes
-
   class Ec2
-
-    @@baseurl = 'http://169.254.169.254/latest/meta-data'
-
     HYPERVISOR_UUID_PATH = '/sys/hypervisor/uuid'.freeze
     DMI_PRODUCT_UUID_PATH = '/sys/devices/virtual/dmi/id/product_uuid'.freeze
 
@@ -22,13 +18,17 @@ module Cloudscopes
     end
 
     def instance_id
-      @@instanceid ||= Net::HTTP.get(URI("#{@@baseurl}/instance-id"))
+      @@instance_id ||= get_metadata('instance-id')
     end
 
     def availability_zone
-      @@az ||= Net::HTTP.get(URI("#{@@baseurl}/placement/availability-zone"))
+      @@availability_zone ||= get_metadata('placement/availability-zone')
     end
 
-  end
+    private
 
+    def get_metadata(path)
+      Net::HTTP.get(URI("http://169.254.169.254/latest/meta-data/#{path}"))
+    end
+  end
 end
