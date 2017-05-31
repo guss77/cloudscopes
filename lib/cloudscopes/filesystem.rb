@@ -31,10 +31,9 @@ module Cloudscopes
   end
 
   class Filesystem
-    @@mountpoints = File.read("/proc/mounts").split("\n").grep(/(?:xv|s)d/).collect { |l| l.split(/\s+/)[1] }
-
     def mountpoints
-      @@mountpoints
+      @@mountpoints ||=
+          File.read("/proc/mounts").split("\n").grep(/(?:xv|s)d/).collect { |l| l.split(/\s+/)[1] }
     end
 
     def df(path)
