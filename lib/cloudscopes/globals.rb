@@ -3,9 +3,7 @@
 #
 
 def publish(samples)
-  unless system("test -f /sys/hypervisor/uuid && test `head -c 3 /sys/hypervisor/uuid` = ec2")
-    raise "Not running in EC2, so won't publish!"
-  end
+  raise "Not running in EC2, so won't publish!" unless Cloudscopes::Ec2.runs_on_ec2?
   samples.each do |type,metric_samples|
     begin
       valid_data = metric_samples.select(&:valid)
