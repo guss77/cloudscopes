@@ -2,7 +2,9 @@ language: ruby
 rvm:
   - 2.2
   - 2.3
-script: bundle exec rspec spec
+script: 
+ - bundle exec rspec spec
+ - bundle exec gem build cloudscopes.gemspec
 deploy:
  - provider: rubygems
    api_key:
