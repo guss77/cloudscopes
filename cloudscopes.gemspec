@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{Ruby gem to report system statistics to web based monitoring services such as CloudWatch}
   spec.description   = %q{Ruby gem to report system statistics to web based monitoring services such as CloudWatch}
   spec.homepage      = "http://github.com/guss77/cloudscopes"
-  spec.license       = "GPLv3"
+  spec.license       = "GPL-3.0"
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
