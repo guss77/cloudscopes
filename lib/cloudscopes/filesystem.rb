@@ -1,5 +1,5 @@
 module Cloudscopes
-  
+
   module StatFs
     # The result of a statfs operation, see "man statfs" for more information
     # on each field.  We add some helper methods that deal in bytes.
@@ -8,13 +8,13 @@ module Cloudscopes
       def free; bfree * bsize; end
       def avail; bavail * bsize; end
     end
-    
+
     module Lib
       extend FFI::Library
       ffi_lib FFI::Library::LIBC
       attach_function 'statfs64', [:string, :pointer], :int
     end
-    
+
     # Drives the interface to the C library, returns a StatFs::Result object
     # to show filesystem information for the given path.
     #
@@ -29,19 +29,16 @@ module Cloudscopes
       end
     end
   end
-    
+
   class Filesystem
-    
-    @@mountpoints = File.read("/proc/mounts").split("\n").grep(/(?:xv|s)d/).collect { |l| l.split(/\s+/)[1] }
-    
     def mountpoints
-      @@mountpoints
+      @@mountpoints ||=
+          File.read("/proc/mounts").split("\n").grep(/(?:xv|s)d/).collect { |l| l.split(/\s+/)[1] }
     end
-    
+
     def df(path)
       StatFs.statfs(path)
     end
-    
   end
 
 end
