@@ -1,11 +1,15 @@
 language: ruby
 rvm:
-  - 2.2
-  - 2.3
-script: 
+ - 2.2
+ - 2.3
+script:
  - bundle exec rspec spec
  - bundle exec gem build cloudscopes.gemspec
 deploy:
- - provider: rubygems
-   api_key:
-     secure: ZgjiAyUNezHovt4HC+95WDyavZBtc9XAktAnSbz3joPANSH01Zo7Y1xpFsZ0w06E2jfUQV7YGewRsmDYbYHnz0HtR5gE5VGEUnzVxay+NxZzOElnePC6lICcAIqamOuls809ooI1varn45RNzJ8SqhfKpLcWHUVanHYo/pdzpFesLunfiRDvw+VGYHlcVd/i7rqF3a2zzd4GqPPW186X/c9EqfNhLZQaM7V58G1HV4Tha1ardD5S7ohpj9qIrzBywqvkjQjxgKyvEaq9X2DIXD4wydcDs2SXahj7vjA0crz4Q9fdgBZtBUTrsECyKUu+Aqr3rPdITTKqnC2PvRI9DTGqUTEyXrC8Vn4dp8dP4gzeCFwKryCbdOh27+JmE88kbp0uMVxvRZQ2MWA33TBDd4FgQ/P5xKn4Fuh7SpMHuB1E3Ffn5lonN08WIUNNQ/rqSV0QvQzoto30I7qIizlBZrRWjju/6ETkghTFw68MeD9b58BIqR+v/MMD96YYnSgzXPJKZcXGoh7RX/lTr8xrwp2O5Ey+OVJVZ2vgcPirXqVlGIvbdEP/QSBubccM5XNYwM/hfS5wUQP8oqZ8L5L/9Iynrc6M2cyaWEw2pnhlMoJXe8W2MFW2lwIGi1g7RCqD7/K4JRM/LV858vg+GLUOLPXMt/+/AJY9AtPt8b1t+f0=
+  provider: rubygems
+  api_key:
+    secure: v7NKtzbY0rS/ulmTNhrvuDI/dWiqVkOR4uknO351QUGgKDuhc/FrD8mDe/d5aRv4WhZAUymamTihafchY+L6hXTst9OrAAsVx267vGN4PkCFzxF5tpVSr0MWG2FM4C3ZZC6Ud34BZDzFKUKvVUTMOMKrwBeCYRkg2G4SzvzbeXts6/ndI6D/qb38oHQb9nKG3UO9DnA3wMJdPFY0JKIkOuGCGSyBqrHQa+3XkKCbxqswv23vBbrHycj6HN5DIhwGy5vGpjkTr1OZ9t0tBrqNg8SYzjlvMbpJlwVVfyqECbuYCfEmJesHlPkS/Wz2n3eMzV50wUyQMQ5ZSYbyvh2DrcLb3snLYGITPgcJ887IhnJGAiCHPVZFvujStjZiKG2WNCkpQdjqGLKQdV20w9at+sp5KruM7bVEz86CoS3my3tjRHsLz83jYW78Y6fb3OMbQ/5ZlhtDge7xDWLDlo4M8hEyfGyTzTb0P7Y/nUvLsunPzbJTNAYp9bGXMuHcyO0DofCd+64H830FE01xCr5QFLVezJ+lpQKIb+gneUjUvVNdUcohlwLt+EZsxNOPiz3s1lbvYazz/gLpX58slzXglopBB574CxaEODn71p5+2rAqxv+yofsSxjRYFRLPw0GKhIpLZZZOaAwxzL3trEfvMTbEaXzvMxhkXvZqUEeVjp0=
+  gem: cloudscopes
+  on:
+    tags: true
+    repo: guss77/cloudscopes
