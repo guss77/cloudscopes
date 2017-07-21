@@ -3,7 +3,7 @@
 require 'fileutils'
 
 basedir = File.expand_path(File.dirname(__FILE__) + "/..")
-FileUtils.mkdir_p '/etc/cloudscopes/monitor.d'
+FileUtils.mkdir_p '/etc/cloudscopes/metric_definition.d'
 FileUtils.cp "#{basedir}/config/cron.config", '/etc/cron.d/cloudscopes-monitoring'
 FileUtils.cp "#{basedir}/config/monitoring.yaml", '/etc/cloudscopes/monitor.conf'
 FileUtils.chmod 0600, '/etc/cron.d/cloudscopes-monitoring'

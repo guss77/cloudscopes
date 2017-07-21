@@ -1,5 +1,5 @@
 settings:
-  configdir: /etc/cloudscopes/monitor.d
+  metric_definition_dir: /etc/cloudscopes/metric_definition.d
   interval: 60
   provider: cloudwatch
   #key: AWS_KEY_ID

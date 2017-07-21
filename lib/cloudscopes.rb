@@ -1,9 +1,3 @@
-require 'rubygems'
-
-#require 'bundler/setup' #if ENV['BUNDLE_GEMFILE'] && File.exists?(ENV['BUNDLE_GEMFILE'])
-
-require 'aws-sdk'
-require 'optparse'
 require 'ffi'
 
 require 'cloudscopes/version'
